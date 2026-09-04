@@ -58,3 +58,51 @@ Below are the first five rows of the cleaned data used for the comeback analysis
 | Project Conquerors | -118 | 118 | 1 |
 | Zerance | -4439 | 4439 | 0 |
 | Karmine Corp Blue Stars | -5490 | 5490 | 0 |
+
+### Univariate Analysis
+
+The following histogram shows the distribution of gold deficits among teams
+that were behind at 15 minutes. Most teams have relatively smaller deficits,
+while extremely large gold deficits are much less common.
+
+This histogram below shows the distirbution of gold defecits among teams that were behind at 15 minutes. Most teams have a smaller deficit while extremlely large gold deffcitis are actually a lot less common.
+
+<div style="text-align: center;">
+  <iframe
+    src="assets/gold-deficit-distribution.html"
+    width="100%"
+    height="550"
+    frameborder="0"
+    style="max-width: 900px;"
+  ></iframe>
+</div>
+
+### Bivariate Analysis
+
+This box plot below compares the two distirbutions of 15 minute gold deficits of teams that ended up losing vs teams that came back to win. For comeback wins the plot is more concentrated around smaller deficits. As for losses, the plot is more conentrated around larger deficits, which suggests that larger early gold deficits are more difficult to comeback from.
+
+<div style="text-align: center;">
+  <iframe
+    src="assets/gold-deficit-by-outcome.html"
+    width="100%"
+    height="550"
+    frameborder="0"
+    style="max-width: 900px;"
+  ></iframe>
+</div>
+
+### Interesting Aggregates
+
+To directly examine the relationship between gold deficit at 15 minutes and result I grouped the teams into ranges based on size of their gold dficit at 15 minutes. I then calculted the comback win rate for each range.
+
+
+| deficit_group   |    result |
+|:----------------|----------:|
+| 0-500           | 0.468378  |
+| 500-1000        | 0.388999  |
+| 1000-2000       | 0.290233  |
+| 2000-3000       | 0.196774  |
+| 3000-5000       | 0.077592  |
+| 5000+           | 0.0166667 |
+
+From this table we see a clear downward trend in win rate. As gold deficit at 15 minutes increases the comback win rate decreases. Teans behind 500 gold or less won around 47% of their games while teams behind 5000 or more gold came back only around 2% of the time. This suggests that the gold deficit at 15 minutes is strongly associated with the team's chance at obtaining a comeback win.
