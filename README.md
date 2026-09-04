@@ -1,7 +1,5 @@
 **Andrew Xia**
 
-**Andrew Xia**
-
 ## Introduction
 
 League of Legends is a competitive team-based game in which two teams compete to gain advantages and ultimately destroy the opposing team's base. Throughout a match, teams earn gold in order to purchase stronger items. Because of this, the difference in gold between two teams is an important and great way to
