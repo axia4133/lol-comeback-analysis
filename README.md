@@ -2,7 +2,7 @@
 
 ## Introduction
 
-League of Legends is a competitive team-based game in which two teams compete to gain advantages and ultimately destroy the opposing team's base. Throughout a match, teams earn gold in order to purchase stronger items. Because of this, the difference in gold between two teams is an important and great way to
+League of Legends is a competitive team-based game where two teams compete to gain advantages and ultimately destroy the opposing team's base (nexus tower). Throughout a match, teams earn gold in order to purchase stronger items. Because of this, the difference in gold between two teams is an important and great way to
 measure which team is ahead at a given point in the game.
 
 In this project, I analyze match data provided by the Oracle Elixir 2025 esports match data. The original dataset contains 120,492 rows and 165 columns. Each game contains individual player rows as well as
@@ -31,3 +31,30 @@ These were the columns that were relevant in my analsis:
 | `xpdiffat15` | The team's experience difference relative to its opponent at 15 minutes. |
 | `killsat15` | The number of kills the team has at 15 minutes. |
 | `deathsat15` | The number of deaths the team has at 15 minutes. |
+
+
+## Data Cleaning and Exploratory Data Analysis
+
+### Data Cleaning
+The orignal dataset has both individaul player rows and team level summary rows. My question focuses on whether or not a **team** can come back from and early gold deficit so I kept only the team summary rows. The reduced the data to 20,082 team rows.
+
+I then looked at the missing values in `golddiffat15` which had 1,640 rows with missing 15 minute gold differences. All of these rows were marked as `partial` in the `datacompleteness` column whereas the 18,442 rows with recorded 15-minute gold difference were marekd as `complete`. I only kept complete games for my analysis so that every row had the information needed at 15 minutes.
+
+Since I am specifically studying comebakcs I only kept teams who had a negative `golddiffat15`, meaning they were behind in gold at 15 minutes.
+
+Finally, I created a new column called `gold_deficit_at_15` by multiplying
+`golddiffat15` by -1. This makes the deficit easier to interpret: instead of
+a value such as -2000 representing a 2000-gold deficit, the new column
+represents that deficit as a positive value of 2000.
+
+Lastly, I made mulitplied `golddiffat15` by -1 to create `gold_deficit_at_15`. This makes it easier to interpret as instead of a value like -2000 for a 2000 gold defecit, the new column simply has 200 as a positive number to represent the deficit.
+
+Below are the first five rows of the cleaned data used for the comeback analysis:
+
+| teamname | golddiffat15 | gold_deficit_at_15 | result |
+| --- | ---: | ---: | ---: |
+| IziDream | -3837 | 3837 | 0 |
+| Skillcamp | -5069 | 5069 | 0 |
+| Project Conquerors | -118 | 118 | 1 |
+| Zerance | -4439 | 4439 | 0 |
+| Karmine Corp Blue Stars | -5490 | 5490 | 0 |
