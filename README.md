@@ -196,7 +196,7 @@ Since the p-value is less than the significance level of 0.05 I reject the null 
 
 <div style="text-align: center;">
   <iframe
-    src="assets/comeback-hypothesis-test.html"
+    src="assets/comeback-hypothesis-test-v2.html"
     width="100%"
     height="550"
     frameborder="0"
