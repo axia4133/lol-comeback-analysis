@@ -1,5 +1,6 @@
 **Andrew Xia**
 
+>
 ## Introduction
 
 League of Legends is a competitive team-based game where two teams compete to gain advantages and ultimately destroy the opposing team's base (nexus tower). Throughout a match, teams earn gold in order to purchase stronger items. Because of this, the difference in gold between two teams is an important and great way to
@@ -107,7 +108,7 @@ To directly examine the relationship between gold deficit at 15 minutes and resu
 
 From this table we see a clear downward trend in win rate. As gold deficit at 15 minutes increases the comback win rate decreases. Teans behind 500 gold or less won around 47% of their games while teams behind 5000 or more gold came back only around 2% of the time. This suggests that the gold deficit at 15 minutes is strongly associated with the team's chance at obtaining a comeback win.
 
-
+>
 ## Assessment of Missingness
 
 ### MNAR Analysis
@@ -168,7 +169,7 @@ Both Blue and Red side teams had a missingness rate of roughly **0.08** which gi
 
 Because the p-value is larger than 0.05, we fail to reject the null hypothesis, thus ther eis not sufficienct evidence that missingness of `godldiffat15` depends on the side a team plays on.
 
-
+>
 ## Hypothesis Testing
 
 In order to investigate if a team's early gold deficit is associated with the teams chance of making a comeback, I performed a permutation test comparing teams with relatively small and large gold deficits at 15 minutes.
