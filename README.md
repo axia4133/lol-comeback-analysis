@@ -65,7 +65,7 @@ The following histogram shows the distribution of gold deficits among teams
 that were behind at 15 minutes. Most teams have relatively smaller deficits,
 while extremely large gold deficits are much less common.
 
-This histogram below shows the distirbution of gold defecits among teams that were behind at 15 minutes. Most teams have a smaller deficit while extremlely large gold deffcitis are actually a lot less common.
+This histogram below shows the distributions of gold defecits among teams that were behind at 15 minutes. Most teams have a smaller deficit while extremlely large gold deffcitis are actually a lot less common.
 
 <div style="text-align: center;">
   <iframe
@@ -79,7 +79,7 @@ This histogram below shows the distirbution of gold defecits among teams that we
 
 ### Bivariate Analysis
 
-This box plot below compares the two distirbutions of 15 minute gold deficits of teams that ended up losing vs teams that came back to win. For comeback wins the plot is more concentrated around smaller deficits. As for losses, the plot is more conentrated around larger deficits, which suggests that larger early gold deficits are more difficult to comeback from.
+This box plot below compares the two distributions of 15 minute gold deficits of teams that ended up losing vs teams that came back to win. For comeback wins the plot is more concentrated around smaller deficits. As for losses, the plot is more conentrated around larger deficits, which suggests that larger early gold deficits are more difficult to comeback from.
 
 <div style="text-align: center;">
   <iframe
@@ -164,6 +164,42 @@ Both Blue and Red Side teams had a missingness rate of approximately
 **0.08**, giving an observed difference of **0**. The permutation test
 produced a p-value of **1.0**.
 
-Both Blue and Red side teams had a missingness rate of roughly **0.08** which gives an observed difference of **0.00**. The permutation test gave a p-value of **1.0**
+Both Blue and Red side teams had a missingness rate of roughly **0.08** which gives an observed difference of **0.00** and the permutation test gave a p-value of **1.0**
 
 Because the p-value is larger than 0.05, we fail to reject the null hypothesis, thus ther eis not sufficienct evidence that missingness of `godldiffat15` depends on the side a team plays on.
+
+
+## Hypothesis Testing
+
+In order to investigate if a team's early gold deficit is associated with the teams chance of making a comeback, I performed a permutation test comparing teams with relatively small and large gold deficits at 15 minutes.
+
+I classified teams as having a small defiict as **less than 100 godl behind** and teams having a large deficit as **at least 100 gold behind**.
+
+**Null Hypothesis:** Teams that are less than 1000 gold behind at 15 minutes have the same comeback win rate as teams that are at least 1000 gold behind. Any observed difference is due to random chance.
+
+**Alternative Hypothesis:** Teams that are less than 1000 gold behind at 15 minutes have a higher comeback win rate than teams that are at least 1000 gold behind.
+
+**significance level of 0.05**
+
+**Test Statistic:** The difference in comeback win rates:
+
+**small-deficit comeback rate − large-deficit comeback rate**
+
+I chose this test stastic because my question directly compares the probability of a comeback between the two deficit groups. Positive values mean that teams with a smaller deficit have a higher comeback rate.
+
+I got an observed comeback win rate of **42.97** for teams less than 1000 gold behind and **19.06** for teams that were at least 1000 gold behind. The observed difference was apporximately **0.239** .
+
+After 100 permutations, none of the simulated differences were as large as the observed difference which gave us a p-value of 0.00 (or p-value of less than 0.001).
+
+Since the p-value is less than the significance level of 0.05 I reject the null hypothesis. The results of the permutation test shows strong evidence taht teams with samller gold deficits at 15 minutes have a higher comeback win rate than teams with larger deficits.
+
+<div style="text-align: center;">
+  <iframe
+    src="assets/comeback-hypothesis-test.html"
+    width="100%"
+    height="550"
+    frameborder="0"
+    style="max-width: 900px;"
+  ></iframe>
+</div>
+
