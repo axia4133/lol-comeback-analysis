@@ -32,7 +32,7 @@ These were the columns that were relevant in my analsis:
 | `killsat15` | The number of kills the team has at 15 minutes. |
 | `deathsat15` | The number of deaths the team has at 15 minutes. |
 
-
+>
 ## Data Cleaning and Exploratory Data Analysis
 
 ### Data Cleaning
@@ -106,3 +106,64 @@ To directly examine the relationship between gold deficit at 15 minutes and resu
 | 5000+           | 0.0166667 |
 
 From this table we see a clear downward trend in win rate. As gold deficit at 15 minutes increases the comback win rate decreases. Teans behind 500 gold or less won around 47% of their games while teams behind 5000 or more gold came back only around 2% of the time. This suggests that the gold deficit at 15 minutes is strongly associated with the team's chance at obtaining a comeback win.
+
+
+## Assessment of Missingness
+
+### MNAR Analysis
+
+After investagating the missingness of `golddiffat15` I did not have enogh evidence to conclude that `golddiffat15` is **MNAR**. My analysis shows the missingness is strongly associated with the `league` column. This provides evidence for the missingness to possibly be MAR but it doesnt not rule out the possibility of MNAR either.
+
+A possible MNAR mechanism would be if games with extremely large gold differences at 15 minutes were more likely to have their gold difference values missing. For this case the missingness of `golddiffat15` would depend on the value of `golddiff15` itself.
+
+Additional information that could explain the missingness could be whether or not tracking was used for each game. Another piece of information that could help would be  based on the region whether or not that region has their league statistics public through official API's.
+
+
+### Missingness Dependency
+
+In order to test whether missingness of `golddiffat15` depends on other observed variables in the dataset, I did permutation tests using `league` and `side`.
+
+#### Missingness and League
+
+**Null Hypothesis:** The missingness of `golddiffat15` does not depend on
+whether a game is from the LPL. Any observed difference in missingness rates
+is due to random chance.
+
+**Alternative Hypothesis:** The missingness of `golddiffat15` does depend on
+whether a game is from the LPL.
+
+**Test Statistic:** The difference in the proportion of missing
+`golddiffat15` values between LPL and non-LPL games.
+
+The observed difference ofr missingness rates was roughly **0.998**. After doing 1000 permutations, none of the simulated differences were as extreme as the observed difference which gave a p-value of **0.00** (or less than 0.001)
+
+For significance level of 0.05, I reject the null hpothesis. This means there is strong evidence that the missingness of `golddiffat15` depends on if the game is from the LPL league (China's league)
+
+<div style="text-align: center;">
+  <iframe
+    src="assets/missingness-permutation-test.html"
+    width="100%"
+    height="550"
+    frameborder="0"
+    style="max-width: 900px;"
+  ></iframe>
+</div>
+
+
+#### Missingness and Side
+
+I then tested whether the missingness of `golddiffat15` depends on whether or not a team plays on Blue or Red Side.
+
+**Null Hypothesis:** The missingness of `golddiffat15` does not depend on whether a team is on Blue or Red Side.
+
+**Alternative Hypothesis:** The missingness of `golddiffat15` does depend on whether a team is on Blue or Red Side.
+
+**Test Statistic:** The difference in the proportion of missing `golddiffat15` values between Blue Side and Red Side teams.
+
+Both Blue and Red Side teams had a missingness rate of approximately
+**0.08**, giving an observed difference of **0**. The permutation test
+produced a p-value of **1.0**.
+
+Both Blue and Red side teams had a missingness rate of roughly **0.08** which gives an observed difference of **0.00**. The permutation test gave a p-value of **1.0**
+
+Because the p-value is larger than 0.05, we fail to reject the null hypothesis, thus ther eis not sufficienct evidence that missingness of `godldiffat15` depends on the side a team plays on.
