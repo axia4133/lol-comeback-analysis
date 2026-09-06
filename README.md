@@ -43,12 +43,7 @@ I then looked at the missing values in `golddiffat15` which had 1,640 rows with 
 
 Since I am specifically studying comebakcs I only kept teams who had a negative `golddiffat15`, meaning they were behind in gold at 15 minutes.
 
-Finally, I created a new column called `gold_deficit_at_15` by multiplying
-`golddiffat15` by -1. This makes the deficit easier to interpret: instead of
-a value such as -2000 representing a 2000-gold deficit, the new column
-represents that deficit as a positive value of 2000.
-
-Lastly, I made mulitplied `golddiffat15` by -1 to create `gold_deficit_at_15`. This makes it easier to interpret as instead of a value like -2000 for a 2000 gold defecit, the new column simply has 200 as a positive number to represent the deficit.
+Lastly, I made mulitplied `golddiffat15` by -1 to create `gold_deficit_at_15`. This makes it easier to interpret as instead of a value like -2000 for a 2000 gold defecit, the new column 2000 as a positive number to represent the deficit.
 
 Below are the first five rows of the cleaned data used for the comeback analysis:
 
