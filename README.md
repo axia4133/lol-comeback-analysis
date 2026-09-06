@@ -176,7 +176,7 @@ Because the p-value is larger than 0.05, we fail to reject the null hypothesis, 
 
 In order to investigate if a team's early gold deficit is associated with the teams chance of making a comeback, I performed a permutation test comparing teams with relatively small and large gold deficits at 15 minutes.
 
-I classified teams as having a small defiict as **less than 100 godl behind** and teams having a large deficit as **at least 100 gold behind**.
+I classified teams as having a small defiict as **less than 1000 gold behind** and teams having a large deficit as **at least 1000 gold behind**.
 
 **Null Hypothesis:** Teams that are less than 1000 gold behind at 15 minutes have the same comeback win rate as teams that are at least 1000 gold behind. Any observed difference is due to random chance.
 
@@ -192,7 +192,7 @@ I chose this test stastic because my question directly compares the probability 
 
 I got an observed comeback win rate of **42.97** for teams less than 1000 gold behind and **19.06** for teams that were at least 1000 gold behind. The observed difference was apporximately **0.239** .
 
-After 100 permutations, none of the simulated differences were as large as the observed difference which gave us a p-value of 0.00 (or p-value of less than 0.001).
+After 1000 permutations, none of the simulated differences were as large as the observed difference which gave us a p-value of 0.00 (or p-value of less than 0.001).
 
 Since the p-value is less than the significance level of 0.05 I reject the null hypothesis. The results of the permutation test shows strong evidence taht teams with samller gold deficits at 15 minutes have a higher comeback win rate than teams with larger deficits.
 
@@ -274,7 +274,7 @@ For my final model, I kept the `golddiffat15` and `xpdiffat15`, and engineered t
 
 ### Added Features
 
-The first feature I added is a **small deficit indicator** which indicates whehter a team is less than 100 gold behind at 15 minutes. Earlier, my exploratory analysis and hypothesis test showed us that teams with deficits smaller than 1000 gold had a much higher comeback rate compared to teams with larger deficits. This feature allows my model to directly capture this difference.
+The first feature I added is a **small deficit indicator** which indicates whehter a team is less than 1000 gold behind at 15 minutes. Earlier, my exploratory analysis and hypothesis test showed us that teams with deficits smaller than 1000 gold had a much higher comeback rate compared to teams with larger deficits. This feature allows my model to directly capture this difference.
 
 The second new feature added is **combat balance**:
 
@@ -360,17 +360,17 @@ The model had a recall of about **0.32** for Blue Side teams and **0.38** for Re
 
 After performing **1000 permutations**, I obtained a p-value of **0.109**.
 
-Since 0.109 is greater than the significance level of 0.05, I **fail to reject
+Since 0.107 is greater than the significance level of 0.05, I **fail to reject
 the null hypothesis**. There is not enough evidence to conclude that the
 model's recall differs between Blue Side and Red Side teams.
 
-0.109 is greater than my significance level of 0.05 so I **fail** to reject the null hypothesis. There is not enough evidence to come to the conclusion that the model's recall differes between Blue and Red Side teams. 
+0.107 is greater than my significance level of 0.05 so I **fail** to reject the null hypothesis. There is not enough evidence to come to the conclusion that the model's recall differes between Blue and Red Side teams. 
 
 However, this does not prove that the model is perfectly fair. It only shows that the permutation test did not provide statistically significant evidence of a difference in recall between the two groups.
 
 <div style="text-align: center;">
   <iframe
-    src="assets/fairness-permutation-test.html"
+    src="assets/fairness-permutation-test-v2.html"
     width="100%"
     height="550"
     frameborder="0"
@@ -378,4 +378,4 @@ However, this does not prove that the model is perfectly fair. It only shows tha
   ></iframe>
 </div>
 
-This histogram shows the permutation distirbution of the absolute difference in recall between Blue and Red side under the null hypothesis. The red line shows the observed difference of about 0.06. Since the differences at least this large occured reasonbly often under the null, the resulting p-value of 0.109 is not statistically signifcant at the 0.5 significance level.
+This histogram shows the permutation distirbution of the absolute difference in recall between Blue and Red side under the null hypothesis. The red line shows the observed difference of about 0.06. Since the differences at least this large occured reasonbly often under the null, the resulting p-value of 0.109 is not statistically signifcant at the 0.05 significance level.
