@@ -358,7 +358,7 @@ I used a **significance level of 0.05**.
 
 The model had a recall of about **0.32** for Blue Side teams and **0.38** for Red Side teams. The observed absolute difference for recall is about **0.06**
 
-After performing **1000 permutations**, I obtained a p-value of **0.109**.
+After performing **1000 permutations**, I obtained a p-value of **0.107**.
 
 Since 0.107 is greater than the significance level of 0.05, I **fail to reject
 the null hypothesis**. There is not enough evidence to conclude that the
@@ -378,4 +378,4 @@ However, this does not prove that the model is perfectly fair. It only shows tha
   ></iframe>
 </div>
 
-This histogram shows the permutation distirbution of the absolute difference in recall between Blue and Red side under the null hypothesis. The red line shows the observed difference of about 0.06. Since the differences at least this large occured reasonbly often under the null, the resulting p-value of 0.109 is not statistically signifcant at the 0.05 significance level.
+This histogram shows the permutation distirbution of the absolute difference in recall between Blue and Red side under the null hypothesis. The red line shows the observed difference of about 0.06. Since the differences at least this large occured reasonbly often under the null, the resulting p-value of 0.107 is not statistically signifcant at the 0.05 significance level.
