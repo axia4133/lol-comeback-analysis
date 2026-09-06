@@ -232,3 +232,34 @@ About 27% of teams that are behind at 15 minutes comeback to win the game, there
 We can combine **precision** and **recall** to use F1-score. Recall is important because I want the model to be able to indentify actual comeback wins and precision is also important because I want the model to avoid predicting too many comebacks that don't acutally happen.
 
 I will also report accuracy, precision, and recall to give additional context for the model's performance.
+
+>
+## Baseline Model
+
+My baseline model is a **Decision Tree Classifier** with a max depth of 2. The model uses two features that are available at 15 minutes:
+
+| Feature | Type | Description |
+| --- | --- | --- |
+| `golddiffat15` | Quantitative | The team's gold difference relative to its opponent at 15 minutes. |
+| `xpdiffat15` | Quantitative | The team's experience difference relative to its opponent at 15 minutes. |
+
+Both features are quantitative, so no categorical encoding was necessary.
+They were passed directly into the Decision Tree Classifier through an
+`sklearn` Pipeline.
+
+Since both features are quantitative I did not use any categorical encoding. Both features were passed through the Decision tree Classifier using an `sklearn` Pipeline directly.
+
+The model achieved a training accuracy of approximately **72.75%** and a test
+accuracy of approximately **73.32%**. The similar training and test accuracies
+suggest that the model is not substantially overfitting.
+
+This model got a training accuracy of roughly **72.75%** and a test accuracy of roughly **73.32%**. Since the trainign and test accuracies are quite similar, this suggests that the model is not substantially overfitting. However this model can be misleading, because we are using accuracy. About 73% of teams that were behind at 15 minutes evnetually lose, so a model can achieve relatively high accuracy just by predicting a loss for pretty much every team.
+
+When treating a comeback win as the positive class, the baseline model had a
+**test recall of 0** and an **F1-score of 0**. This means that the model failed
+to correctly identify any of the teams that actually came back and won.
+
+The baseline model also had a test recall and F1-score of 0 when having the comeback win as the positive class. This means that the model was not able to correctly identify any of the teams that actually came back and won.
+
+Therefore, I don't think the baseline model to be actually useful for this prediction task. The accuracy does seem relatively high but it was unable to truly identify comeback wins.
+
