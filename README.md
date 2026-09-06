@@ -150,6 +150,8 @@ For significance level of 0.05, I reject the null hpothesis. This means there is
   ></iframe>
 </div>
 
+This histogram shows the empirical distribution of the difference in `golddiffat15` missingness rates for LPL and non-LPL games under the null hypothesis. The red line shows the observed difference of about 0.998. Since the observed statistic lies far outside the diestirbution of the permutation, the results show strong evidence that the missingness of `golddiffat15` depends on if a game is form the LPL.
+
 
 #### Missingness and Side
 
@@ -203,6 +205,8 @@ Since the p-value is less than the significance level of 0.05 I reject the null 
     style="max-width: 900px;"
   ></iframe>
 </div>
+
+This histogram shows the empircal difference for comeback win rates under the null hypothesis. The red line represents the observed difference of about 0.238. This lies far right of the permutation distribution which means it is very unlikely that teams with small or large gold deficits actually have the same comeback win rate. This support sht conclusion that teams with smaller deficits at 15 minutes have a higher chance of coming back and winning.
 
 >
 ## Framing a Prediction Problem
@@ -324,4 +328,54 @@ The final model significantly improves on the baseline model. The baseline had a
 
 Althought the final model does have a lower accuracy compared to the baseline model, accuracy here is not the primary metric because of the imbalanced prediction problem. An increase of F1-score from **0** to approximately **0.37** make sthe final model substantially better and more useful for indentifying comeback wins.
 
+>
+## Fairness Analysis
 
+For my fairness analysis, I looked at and examined whether or not the final model performs differently for teams playing **Blue Side** compared to the teams playing on **Red Side**
+
+The two groups are:
+
+- **Group X:** Blue Side teams
+- **Group Y:** Red Side teams
+
+My evaluation metric was **recall** since comeback wins are the positive class and recall measure the proportion of actual comeback wins that the model successfully identifies.
+
+### Hypotheses
+
+**Null Hypothesis:** The model is fair with respect to side. Its recall for
+Blue Side and Red Side teams is approximately the same, and any observed
+difference is due to random chance.
+
+**Alternative Hypothesis:** The model is not fair with respect to side. Its
+recall differs between Blue Side and Red Side teams.
+
+**Test Statistic:** The absolute difference in recall between Blue Side and
+Red Side teams.
+
+I use absolute difference here for my test statistic since I want to know if the model performs differently between the two sides, regardless of which side has a higher recall.
+
+I used a **significance level of 0.05**.
+
+The model had a recall of about **0.32** for Blue Side teams and **0.38** for Red Side teams. The observed absolute difference for recall is about **0.06**
+
+After performing **1000 permutations**, I obtained a p-value of **0.109**.
+
+Since 0.109 is greater than the significance level of 0.05, I **fail to reject
+the null hypothesis**. There is not enough evidence to conclude that the
+model's recall differs between Blue Side and Red Side teams.
+
+0.109 is greater than my significance level of 0.05 so I **fail** to reject the null hypothesis. There is not enough evidence to come to the conclusion that the model's recall differes between Blue and Red Side teams. 
+
+However, this does not prove that the model is perfectly fair. It only shows that the permutation test did not provide statistically significant evidence of a difference in recall between the two groups.
+
+<div style="text-align: center;">
+  <iframe
+    src="assets/fairness-permutation-test.html"
+    width="100%"
+    height="550"
+    frameborder="0"
+    style="max-width: 900px;"
+  ></iframe>
+</div>
+
+This histogram shows the permutation distirbution of the absolute difference in recall between Blue and Red side under the null hypothesis. The red line shows the observed difference of about 0.06. Since the differences at least this large occured reasonbly often under the null, the resulting p-value of 0.109 is not statistically signifcant at the 0.5 significance level.
