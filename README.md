@@ -217,7 +217,7 @@ This is a **binary classification** problem and the response variable is `result
 - `1` represents a comeback win.
 - `0` represents a loss.
 
-I chose result due the the fact that the goal of my model is to predict if a team that is curretnly behind will eventually recover and win the match.
+I chose `result` because the goal of my model is to predict if a team that is currently behind and will eventually recover and win the match.
 
 ### Time of Prediction
 
@@ -262,4 +262,66 @@ to correctly identify any of the teams that actually came back and won.
 The baseline model also had a test recall and F1-score of 0 when having the comeback win as the positive class. This means that the model was not able to correctly identify any of the teams that actually came back and won.
 
 Therefore, I don't think the baseline model to be actually useful for this prediction task. The accuracy does seem relatively high but it was unable to truly identify comeback wins.
+
+>
+## Final Model
+
+For my final model, I kept the `golddiffat15` and `xpdiffat15`, and engineered two additional features using the information available at 15 minutes.
+
+### Added Features
+
+The first feature I added is a **small deficit indicator** which indicates whehter a team is less than 100 gold behind at 15 minutes. Earlier, my exploratory analysis and hypothesis test showed us that teams with deficits smaller than 1000 gold had a much higher comeback rate compared to teams with larger deficits. This feature allows my model to directly capture this difference.
+
+The second new feature added is **combat balance**:
+
+**kills at 15 minutes − deaths at 15 minutes**
+
+Kills and deaths provide informations on how well a team performed in early game fights. For example two teams with similar gold deficits may still be in two very different situations if one team has been performing better in combat. This feature provides the model with additional information on the state fo the game beyong just gold and experience alone.
+
+The final model uses the information from:
+
+| Feature | Description |
+| --- | --- |
+| `golddiffat15` | Gold difference at 15 minutes |
+| `xpdiffat15` | Experience difference at 15 minutes |
+| Small-deficit indicator | Whether the team is less than 1000 gold behind |
+| Combat balance | Kills minus deaths at 15 minutes |
+
+### Model and Hyperparameter Selection
+
+I experimented with both **Random Forest Classifier** and **Decision Tree Classifiers**, both of which I used 5 fold cross validation using `GridSearchCV and optimized using F1-score.
+
+I searched over several values of:
+
+- `max_depth`
+- `min_samples_split`
+- `criterion`, using both `gini` and `entropy`
+
+The combinations with the highest validation F1-scores all had very large differences between their training and validation F1-scores which suggests that the models were overfitting.
+
+Because of this I selected a simpler Decision Tree:
+
+- `max_depth = 20`
+- `min_samples_split = 20`
+- `criterion = 'gini'`
+
+This model had a training F1-score of roughly **0.66** and a validation F1-score of roughly **0.34**. Although the validation F1-score was slightly lower than the highest value that was found during the search, the smaller difference between the training and validation performance suggests less overfit.
+
+### Final Model Performance
+
+After using our model on the unseen test set, the Final model got scores of:
+
+| Metric | Score |
+| --- | ---: |
+| Accuracy | 0.680 |
+| Precision | 0.390 |
+| Recall | 0.354 |
+| F1-score | 0.371 |
+
+A validation F1-score of roughly **0.34** was pretty close to the test F1-score of about **0.37** which suggests that the model performed simlarly on unseen data.
+
+The final model significantly improves on the baseline model. The baseline had an F1-score and recall of **0** which means it didn't identify any actual comeback wins. The final mdoel had a recall of about **0.35** meaning it successfully indentifies some teams that actually came back to win their game.
+
+Althought the final model does have a lower accuracy compared to the baseline model, accuracy here is not the primary metric because of the imbalanced prediction problem. An increase of F1-score from **0** to approximately **0.37** make sthe final model substantially better and more useful for indentifying comeback wins.
+
 
