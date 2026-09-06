@@ -204,3 +204,31 @@ Since the p-value is less than the significance level of 0.05 I reject the null 
   ></iframe>
 </div>
 
+>
+## Framing a Prediction Problem
+
+The question I will answer for the prediction portion of this project:
+
+> **Among teams that are behind in gold at 15 minutes, can we predict whether
+> they will come back and win the game?**
+
+This is a **binary classification** problem and the response variable is `result`, where:
+
+- `1` represents a comeback win.
+- `0` represents a loss.
+
+I chose result due the the fact that the goal of my model is to predict if a team that is curretnly behind will eventually recover and win the match.
+
+### Time of Prediction
+
+The prediction for whether or not a team will comecback is made at 15 minutes into the game. Therefore, the model will only use information that would already be available at that point of the match. It will not use match data from later in the game because those values would not be known when the prediction is being made.
+
+### Evaluation Metric
+
+**F1-score** will be my main evaluation metric.
+
+About 27% of teams that are behind at 15 minutes comeback to win the game, therefore our response variable is imbalanced. Because of this, accuracy can be misleading as a model could achieve relatively high accuracy just by predicting that every team will lose.
+
+We can combine **precision** and **recall** to use F1-score. Recall is important because I want the model to be able to indentify actual comeback wins and precision is also important because I want the model to avoid predicting too many comebacks that don't acutally happen.
+
+I will also report accuracy, precision, and recall to give additional context for the model's performance.
